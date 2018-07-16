@@ -79,3 +79,12 @@ The Thumbor-Filter which is added to the placehold-image when lazyloading the im
 lazyload(not null, optional):
 Enabled by default. Let sizes-calculation be handled by lazysizes script.
 https://github.com/aFarkas/lazysizes
+
+
+## Default configuration for JbPhumborBundle
+
+This bundle configures the JbPhumborBundle with [```jb_phumbor-default-config.yaml```](Resources/config/jb_phumbor-default-config.yaml):
+the Thumbor server URL as well as some default transformations. You can overwrite any setting in your application config
+for ```jb_phumbor``` and you still have to provide the server secret.
+
+
