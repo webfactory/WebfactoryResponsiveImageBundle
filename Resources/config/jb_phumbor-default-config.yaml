@@ -1,0 +1,87 @@
+# each setting can be overwritten in your application
+jb_phumbor:
+    server:
+        url: "https://thumbor-cache.webfactory.de"
+
+    transformations:
+        image_thumb:
+            resize: { width: 80, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [60] }
+        image_xxs:
+            resize: { width: 320, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [60] }
+        image_xs:
+            resize: { width: 480, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [60] }
+        image_s:
+            resize: { width: 600, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_sm:
+            resize: { width: 768, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_md:
+            resize: { width: 992, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_lg:
+            resize: { width: 1200, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_xl:
+            resize: { width: 1600, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_xxl:
+            resize: { width: 2400, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+
+        image_xxs--squared:
+            resize: { width: 320, height: 320 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_xs--squared:
+            resize: { width: 480, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [60] }
+        image_s--squared:
+            resize: { width: 600, height: 600 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_sm--squared:
+            resize: { width: 768, height: 768 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_md--squared:
+            resize: { width: 992, height: 992 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_lg--squared:
+            resize: { width: 1200, height: 1200 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+        image_xl--squared:
+            resize: { width: 1600, height: 1600 }
+            filters:
+                - { name: 'quality', arguments: [80] }
+
+        image_xxs--blurred:
+            resize: { width: 320, height: 0 }
+            filters:
+                - { name: 'blur', arguments: [30] }
+                - { name: 'quality', arguments: [10] }
+        image_xs--blurred:
+            resize: { width: 480, height: 0 }
+            filters:
+                - { name: 'blur', arguments: [30] }
+                - { name: 'quality', arguments: [50] }
+        image_s--blurred:
+            resize: { width: 600, height: 0 }
+            filters:
+                - { name: 'blur', arguments: [30] }
+                - { name: 'quality', arguments: [50] }
