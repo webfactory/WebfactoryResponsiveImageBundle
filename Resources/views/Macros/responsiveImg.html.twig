@@ -1,0 +1,116 @@
+{# Helper: returns sizes-attribute #}
+{% macro sizes(sizes, lazyload) %}
+    {% if lazyload %}
+        data-sizes="auto"
+    {% else %}
+        sizes="
+        {%- if sizes is iterable -%}
+            {%- for key, size in sizes -%}
+                {%- if not loop.last -%}
+                    ({{ key }}) {{ size }},
+                {%- else -%}
+                    {{ size }}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- else -%}
+            {{ sizes|default('100%') }}
+        {%- endif -%}"
+    {% endif %}
+{% endmacro %}
+
+{# Helper: returns srcset-attribute #}
+{% macro srcset(image, widths, lazyload) %}
+    {% if lazyload %}data-{% endif %}srcset="
+    {%- for key, width in widths -%}
+        {{ thumbor(image_url(image), key) }} {{ width }}
+        {%- if not loop.last -%},{%- endif -%}
+    {%- endfor -%}"
+{% endmacro %}
+
+{# Responsive Image #}
+{% macro responsiveImg(image, options) %}
+    {# image \Webfactory\S3UrlBundle\S3\S3ObjectInterface #}
+    {% import _self as helper %}
+
+    {% set defaults = {
+        sizes: '100%',
+        widths: {'image_xxs' : '320w'},
+        placeholderFilter: 'image_xxs--blurred',
+        class: '',
+        altText: '',
+        lazyload: true,
+    } %}
+
+    {% set options = options ? defaults|merge(options) : defaults %}
+
+    {% if image %}
+        <img
+            {{ helper.sizes(options.sizes, options.lazyload) }}
+            {{ helper.srcset(image, options.widths, options.lazyload) }}
+
+            src="{{ thumbor(image_url(image), options.placeholderFilter) }}"
+            class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
+
+            {% if image.credits is defined and image.credits|length > 0 %}
+                title="&copy; {{ image.credits }}"
+            {% endif %}
+        />
+
+        <noscript>
+            <img
+                src="{{ thumbor(image_url(image), options.widths|keys|first) }}"
+                class="{{ options.class }}"
+                alt="{{ options.altText }}"
+                {% if image.credits|length > 0 %}
+                    title="&copy; {{ image.credits }}"
+                {% endif %}
+            />
+        </noscript>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro responsivePicture(variants, options) %}
+    {% import _self as helper %}
+
+    {% set defaults = {
+        class: '',
+        altText: '',
+        lazyload: true,
+        placeholderFilter: 'image_xxs--blurred',
+    } %}
+
+    {% set variantDefaults = {
+        sizes: '100vw',
+        widths: {'image_xxs' : '320w'},
+        query: '',
+    } %}
+
+    {% set options = options ? defaults|merge(options) : defaults %}
+
+    <picture>
+        {% for variant in variants %}
+            {% set variantImage, variantOptions = variant.0, variant.1 %}
+            {% set variantOptions = variantOptions ? variantDefaults|merge(variantOptions) : variantDefaults %}
+
+            {# variantImage \AppBundle\Entity\Media #}
+            {% if variantImage.download %}
+                <source
+                    media="{{ variantOptions.query }}"
+                    {{ helper.sizes(variantOptions.sizes, options.lazyload) }}
+                    {{ helper.srcset(variantImage, variantOptions.widths, options.lazyload) }} />
+            {% endif %}
+        {% endfor %}
+
+        {% if variants.0[0].download %}
+            <img
+                    src="{{ thumbor(image_url(variants.0[0]), options.placeholderFilter) }}"
+                    class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
+                    {#alt="{{ options.altText|default(variants.0[0].description) }}"#}
+                    {% if variants.0[0].credits is defined and variants.0[0].credits|length > 0 %}
+                        title="&copy; {{ variants.0[0].credits }}"
+                    {% endif %}
+            />
+        {% endif %}
+    </picture>
+{% endmacro %}

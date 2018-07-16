@@ -1,0 +1,24 @@
+{
+    "name": "webfactory/responsive-image-bundle",
+    "description": "Symfony bundle for responsive images",
+    "license": "MIT",
+
+    "require": {
+        "php": ">=5.5.9",
+        "twig/twig": "^1.35.4",
+        "symfony/http-kernel": "^2.8.42",
+        "symfony/config": "^2.8.42",
+        "symfony/dependency-injection": "^2.8.42"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^4.8.36",
+        "roave/security-advisories": "dev-master"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Webfactory\\ResponsiveImageBundle\\": "."
+        }
+    }
+}
