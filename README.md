@@ -1,6 +1,8 @@
 # WebfactoryResponsiveImageBundle
 
-Symfony bundle for responsive images.
+A convenience Symfony bundle tailored for current responsive images needs of the webfactory GmbH, without any claims on
+reusability outside of this scope. Ye be warned.
+
 
 ## Twig macros
 
@@ -31,7 +33,7 @@ Image with art direction:
 {{ rimg.responsivePicture(
     [
         [
-            motivee_in_fomat_a,
+            motive_in_format_a,
             '100vw',
             {
                 'image_xxs' : '320w',
@@ -39,7 +41,7 @@ Image with art direction:
             }
         ],
         [
-            motivee_in_fomat_bs,
+            motive_in_format_b,
             '50vw',
             {
                 'image_xxs' : '320w',
@@ -86,5 +88,3 @@ https://github.com/aFarkas/lazysizes
 This bundle configures the JbPhumborBundle with [```jb_phumbor-default-config.yaml```](Resources/config/jb_phumbor-default-config.yaml):
 the Thumbor server URL as well as some default transformations. You can overwrite any setting in your application config
 for ```jb_phumbor``` and you still have to provide the server secret.
-
-
