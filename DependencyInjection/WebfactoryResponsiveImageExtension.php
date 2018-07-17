@@ -14,9 +14,6 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
 {
     public function load(array $config, ContainerBuilder $container)
     {
-        $locator = new FileLocator(__DIR__ . '/../Resources/config');
-        $loader = new XmlFileLoader($container, $locator);
-        $loader->load('services.xml');
     }
 
     public function prepend(ContainerBuilder $container)
