@@ -9,7 +9,7 @@
         "symfony/http-kernel": "^2.8.42",
         "symfony/config": "^2.8.42",
         "symfony/dependency-injection": "^2.8.42",
-        "webfactory/download-bundle": "^2.8.0"
+        "webfactory/download-bundle": "^2.8.1"
     },
 
     "require-dev": {
