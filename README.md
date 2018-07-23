@@ -7,13 +7,18 @@ reusability outside of this scope. Ye be warned.
 
 ### Responsive image:
 
-`responsiveImg(entity, nameOfImageAccessor, imgOptions)` with:
+`responsiveImg(image, options)` with:
 
-- `entity`: the entity that has an image, e.g. a teaser or an artist
-- `nameOfImageAccessor`: the name under which the image can be requested from the entity. E.g. if you would write `artist.photo` in Twig, it's `'photo'` (with the quotes).  
-- `imgOptions`: an array with the keys `sizes` and `widths`.
-    - `sizes`: a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
-    - `widths`: an array of image widths. E.g. `{'480' : '480w', '768' : '768w'}`.
+- `image`: an array with the following keys:
+    - `url` (mandatory): the URL of the image 
+    - `alt` (optional): the alternative text for the image. Defaults to empty string.
+    - `title` (optional): the title text for the image. Defaults to empty string.
+- `options`: an array with the following keys:
+    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
+    - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to "['image_xxs' : '320w']".
+    - `class` (optional): CSS classes to add to the image. Defaults to empty string.
+    - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
+    - `lazyload` (optional): Whether to add the Thumbor filter when lazyloading the image. Should match the target dimensions of the image. Thumbor-Filters are configured in config.yml. Defaults to true.
 
 Example:
  
@@ -21,13 +26,15 @@ Example:
 {% import '@WebfactoryResponsiveImageBundle/Macros/responsiveImg.html.twig' as rimg %}
 
 {{ rimg.responsiveImg(
-    artistEntity,
-    'photo',
     {
-        sizes: '100vw',
-        widths: {
-            'image_xxs' : '320w',
-            'image_md' : '992w'
+        'url': s3_cachable_url(artist, 'photo'),
+        'alt': 'Portrait of ' ~ artistEntity.name
+    },
+    {
+        'sizes': '100vw',
+        'transformations_to_widths': {
+            'image_xxs': '320w',
+            'image_md': '992w'
         }
     }
 ) }}
@@ -35,13 +42,19 @@ Example:
 
 ### Responsive image with art direction:
 
-`macro responsivePicture(variants, picOptions)` with:
+`macro responsivePicture(formats, options)` with:
 
-- `variants`: Array of arrays containing the upper parameters, to build multiple <source>-elements inside a <picture>-element, when art direction is needed.
-- `picOptions`: an array with any number of the keys `class`, `altText`, `placeholderFilter`, `lazyload`:
+- `formats`: Array of objects, with each object describing a different format variant of the motive/picture by the following keys:
+    - `image_url` (mandatory): the URL of the image in this format
+    - `options` (optional): an array with the following keys that parametrize this format variant:
+        - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
+        - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to "['image_xxs' : '320w']".
+        - `media_query` (optional): media query for the source element
+- `options`: an array with the following keys:
     - `class`: Optional class to add to the img-tag. Defaults to empty class attribute is no value is given to keep the code readable.
-    - `altText`: Optional text to add to the alt-attribute of the image.
-    - `placeholderFilter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
+    - `alt` (optional): the alternative text for the image. Defaults to empty string.
+    - `title` (optional): the title text for the image. Defaults to empty string.
+    - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
     - `lazyload`: Enabled by default. Let sizes-calculation be handled by lazysizes script. https://github.com/aFarkas/lazysizes
 
 Example:
@@ -51,29 +64,33 @@ Example:
 
 {{ rimg.responsivePicture(
     [
-        [
-            artistEntity,
-            'photoInPortraitFormat',
-            '100vw',
-            {
-                'image_xxs' : '320w',
-                'image_md' : '992w'
+        {
+            'image_url': cachable_s3_url(artistEntity, 'photoInPortraitFormat'),
+            'options': {
+                'sizes': '100vw',
+                'transformations_to_widths': {
+                    'image_xxs' : '320w',
+                    'image_md' : '992w'
+                },
+                'media_query': '(min-width: 768px)'
             }
-        ],
-        [
-            artistEntity,
-            'photoInSquareFormat',
-            '50vw',
-            {
-                'image_xxs' : '320w',
-                'image_md' : '992w'
+        },
+        {
+            'image_url': cachable_s3_url(artistEntity, 'photoInSquareFormat'),
+            'options': {
+                'sizes': '100vw',
+                'transformations_to_widths': {
+                    'image_xxs' : '320w',
+                    'image_md' : '992w'
+                },
+                'media_query': '(min-width: 640px)'
             }
-        ]
+        }
     ],
     {
-        lazyload: true,
-        class: 'js-object-fit',
-        altText: artistEntity.name
+        'lazyload': true,
+        'class': 'js-object-fit',
+        'alt': 'Portrait of ' ~ artistEntity.name,
     }
 ) }}
 ```

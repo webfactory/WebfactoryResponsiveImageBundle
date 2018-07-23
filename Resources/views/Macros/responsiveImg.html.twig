@@ -1,37 +1,40 @@
 {# Responsive Image #}
-{% macro responsiveImg(entity, nameOfImageAccessor, imgOptions) %}
-    {% if attribute(entity, nameOfImageAccessor) and attribute(attribute(entity, nameOfImageAccessor), 'download') %}
+{% macro responsiveImg(image, options) %}
+    {% if image.url %}
         {% import _self as helper %}
 
+        {% set image = {'alt': '', 'title': ''}|merge(image) %}
         {% set defaultImgOptions = {
-            sizes: '100%',
-            widths: {'image_xxs' : '320w'},
-            placeholderFilter: 'image_xxs--blurred',
-            class: '',
-            altText: '',
-            lazyload: true,
+            'sizes': '100%',
+            'transformations_to_widths': {'image_xxs' : '320w'},
+            'class': '',
+            'lazyload': true,
+            'placeholder_filter': 'image_xxs--blurred',
         } %}
-        {% set imgOptions = imgOptions ? defaultImgOptions|merge(imgOptions) : defaultImgOptions %}
+        {% set options = options ? defaultImgOptions|merge(options) : defaultImgOptions %}
 
         <img
-            {{ helper.sizes(imgOptions.sizes, imgOptions.lazyload) }}
-            {{ helper.srcset(entity, nameOfImageAccessor, imgOptions.widths, imgOptions.lazyload) }}
-
-            src="{{ thumbor(cachable_s3_url(entity, nameOfImageAccessor), imgOptions.placeholderFilter) }}"
-            class="{% if imgOptions.lazyload %}lazyload {% endif %}{{ imgOptions.class }}"
-
-            {% if attribute(attribute(entity, nameOfImageAccessor), 'credits') is defined and attribute(entity, nameOfImageAccessor).credits|length > 0 %}
-                title="&copy; {{ attribute(entity, nameOfImageAccessor).credits }}"
+            {{ helper.sizes(options.sizes, options.lazyload) }}
+            {{ helper.srcset(image.url, options.transformations_to_widths, options.lazyload) }}
+            src="{{ thumbor(image.url, options.placeholder_filter) }}"
+            class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
+            {% if image.alt %}
+                title="{{ image.alt }}"
+            {% endif %}
+            {% if image.title %}
+                title="{{ image.title }}"
             {% endif %}
         />
 
         <noscript>
             <img
-                src="{{ thumbor(cachable_s3_url(entity, nameOfImageAccessor), imgOptions.widths|keys|first) }}"
-                class="{{ imgOptions.class }}"
-                alt="{{ imgOptions.altText }}"
-                {% if attribute(attribute(entity, nameOfImageAccessor), 'credits') is defined and attribute(entity, nameOfImageAccessor).credits|length > 0 %}
-                    title="&copy; {{ attribute(entity, nameOfImageAccessor).credits }}"
+                src="{{ thumbor(image.url, options.transformations_to_widths|keys|first) }}"
+                class="{{ options.class }}"
+                {% if image.alt %}
+                    alt="{{ options.alt }}"
+                {% endif %}
+                {% if image.title %}
+                    title="{{ image.title }}"
                 {% endif %}
             />
         </noscript>
@@ -39,46 +42,50 @@
 {% endmacro %}
 
 {# Responsive Image with art direction #}
-{% macro responsivePicture(variants, picOptions) %}
+{% macro responsivePicture(formats, options) %}
     {% import _self as helper %}
 
-    {% set defaultPicOptions = {
-        class: '',
-        altText: '',
-        lazyload: true,
-        placeholderFilter: 'image_xxs--blurred',
+    {% set defaultOptions = {
+        'class': '',
+        'alt': '',
+        'lazyload': true,
+        'placeholder_filter': 'image_xxs--blurred',
     } %}
 
-    {% set defaultImgOptions = {
-        sizes: '100vw',
-        widths: {'image_xxs' : '320w'},
-        query: '',
+    {% set defaultFormatOptions = {
+        'sizes': '100vw',
+        'transformations_to_widths': {'image_xxs' : '320w'},
+        'media_query': '',
     } %}
 
     <picture>
-        {% set picOptions = picOptions ? defaultPicOptions|merge(picOptions) : defaultPicOptions %}
+        {% set options = options ? defaultOptions|merge(options) : defaultOptions %}
 
-        {% for variant in variants %}
-            {% set entity, nameOfImageAccessor, imgOptions = variant.0, variant.1, variant.2 %}
-            {% set imgOptions = imgOptions ? defaultImgOptions|merge(imgOptions) : defaultImgOptions %}
+        {% for format in formats %}
+            {% set image_url = format.image_url %}
+            {% set formatOptions = format.options ? defaultFormatOptions|merge(format.options) : defaultFormatOptions %}
 
-            {% if attribute(entity, nameOfImageAccessor) and attribute(attribute(entity, nameOfImageAccessor), 'download') %}
+            {% if image_url %}
                 <source
-                    media="{{ imgOptions.query }}"
-                    {{ helper.sizes(imgOptions.sizes, picOptions.lazyload) }}
-                    {{ helper.srcset(entity, nameOfImageAccessor, imgOptions.widths, picOptions.lazyload) }}
+                    {% if formatOptions.media_query %}
+                        media="{{ formatOptions.media_query }}"
+                    {% endif %}
+                    {{ helper.sizes(formatOptions.sizes, options.lazyload) }}
+                    {{ helper.srcset(image_url, formatOptions.transformations_to_widths, options.lazyload) }}
                 />
             {% endif %}
         {% endfor %}
 
-        {% set entity, nameOfImageAccessor = variants.0[0], variants.0[1] %}
-        {% if attribute(entity, nameOfImageAccessor) and attribute(attribute(entity, nameOfImageAccessor), 'download') %}
+        {% set image_url = formats.0.image_url %}
+        {% if image_url %}
             <img
-                src="{{ thumbor(cachable_s3_url(entity, nameOfImageAccessor), picOptions.placeholderFilter) }}"
-                class="{% if picOptions.lazyload %}lazyload {% endif %}{{ picOptions.class }}"
-                alt="{{ picOptions.altText }}"
-                {% if attribute(attribute(entity, nameOfImageAccessor), 'credits') is defined and attribute(entity, nameOfImageAccessor).credits|length > 0 %}
-                    title="&copy; {{ attribute(entity, nameOfImageAccessor).credits }}"
+                src="{{ thumbor(image_url, options.placeholder_filter) }}"
+                class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
+                {% if options.alt %}
+                    alt="{{ options.alt }}"
+                {% endif %}
+                {% if options.title %}
+                    title="{{ options.title }}"
                 {% endif %}
             />
         {% endif %}
@@ -106,10 +113,10 @@
 {% endmacro %}
 
 {# Helper: returns srcset-attribute #}
-{% macro srcset(entity, nameOfImageAccessor, widths, lazyload) %}
+{% macro srcset(image_url, transformations_to_widths, lazyload) %}
     {% if lazyload %}data-{% endif %}srcset="
-    {%- for key, width in widths -%}
-        {{ thumbor(cachable_s3_url(entity, nameOfImageAccessor), key) }} {{ width }}
+    {%- for transformation, width in transformations_to_widths -%}
+        {{ thumbor(image_url, transformation) }} {{ width }}
         {%- if not loop.last -%},{%- endif -%}
     {%- endfor -%}"
 {% endmacro %}
