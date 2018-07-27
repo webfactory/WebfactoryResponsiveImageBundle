@@ -2,7 +2,6 @@
 
 namespace Webfactory\ResponsiveImageBundle\Twig;
 
-use Doctrine\Common\Collections\Collection;
 use Twig\Extension\AbstractExtension;
 
 final class ResponsiveImageExtension extends AbstractExtension
@@ -16,21 +15,21 @@ final class ResponsiveImageExtension extends AbstractExtension
     }
 
     /**
-     * @param object $var
-     * @param string $instance
+     * @param object $object
+     * @param string $class
      * @return bool
      */
     public function isInstanceof($object, $class)
     {
-        return $var instanceof $instance;
+        return $object instanceof $class;
     }
 
     /**
-     * @param object $var
+     * @param object $object
      * @return bool
      */
-    public function isCollection($var)
+    public function isCollection($object)
     {
-        return $var instanceof Collection;
+        return $object instanceof \Doctrine\Common\Collections\Collection;
     }
 }
