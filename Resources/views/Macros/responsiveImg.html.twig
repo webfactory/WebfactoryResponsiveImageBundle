@@ -31,7 +31,7 @@
                 src="{{ thumbor(image.url, options.transformations_to_widths|keys|first) }}"
                 class="{{ options.class }}"
                 {% if image.alt %}
-                    alt="{{ options.alt }}"
+                    alt="{{ image.alt }}"
                 {% endif %}
                 {% if image.title %}
                     title="{{ image.title }}"
