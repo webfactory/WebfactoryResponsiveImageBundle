@@ -8,6 +8,7 @@
             'sizes': '100%',
             'transformations_to_widths': {'image_xxs' : '320w'},
             'class': '',
+            'alt' : '',
             'lazyload': true,
             'lqip': true,
             'placeholder_filter': 'image_xxs--blurred',
@@ -23,9 +24,7 @@
                 data-src="{{ thumbor(image.url, options.placeholder_filter) }}"
             {% endif %}
             class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
-            {% if image.alt %}
-                title="{{ image.alt }}"
-            {% endif %}
+            alt="{{ options.alt is not empty ? options.alt : image.alt }}"
             {% if image.title %}
                 title="{{ image.title }}"
             {% endif %}
