@@ -99,6 +99,6 @@ Example:
 
 ## Default Configuration for JbPhumborBundle
 
-This bundle configures the JbPhumborBundle with [```jb_phumbor-default-config.yaml```](Resources/config/jb_phumbor-default-config.yaml):
+This bundle configures the JbPhumborBundle with [```jb_phumbor-default-config.yaml```](Resources/config/jb_phumbor-default-config.yaml) / [```jb_phumbor-default-config_developmnt.yaml```](Resources/config/jb_phumbor-default-config_developmnt.yaml):
 the Thumbor server URL as well as some default transformations. You can overwrite any setting in your application config
 for ```jb_phumbor``` and you still have to provide the server secret.
