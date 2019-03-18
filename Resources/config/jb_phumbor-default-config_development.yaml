@@ -1,6 +1,3 @@
-imports:
-    - { resource: jb_phumbor-default-config.yaml }
-
 jb_phumbor:
     server:
 #        Local Thumbor-installation in Vagrant 18.04:
