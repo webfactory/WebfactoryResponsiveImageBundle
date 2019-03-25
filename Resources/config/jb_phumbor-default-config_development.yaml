@@ -1,0 +1,4 @@
+jb_phumbor:
+    server:
+#        Local Thumbor-installation in Vagrant 18.04:
+        url: "http://10.37.129.10:8888"
