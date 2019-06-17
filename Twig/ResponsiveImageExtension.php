@@ -3,14 +3,15 @@
 namespace Webfactory\ResponsiveImageBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
+use Twig\TwigTest;
 
 final class ResponsiveImageExtension extends AbstractExtension
 {
     public function getTests()
     {
         return [
-            new \Twig_SimpleTest('instanceof', [$this, 'isInstanceof']),
-            new \Twig_SimpleTest('collection', [$this, 'isCollection']),
+            new TwigTest('instanceof', [$this, 'isInstanceof']),
+            new TwigTest('collection', [$this, 'isCollection']),
         ];
     }
 
