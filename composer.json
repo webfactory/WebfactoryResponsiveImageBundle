@@ -13,10 +13,10 @@
     "require": {
         "php": ">=5.5.9",
         "twig/twig": "^1.35.4|^2.0",
-        "symfony/http-kernel": "^2.8.42 | ^3.4.14",
-        "symfony/config": "^2.8.42 | ^3.4.14",
-        "symfony/dependency-injection": "^2.8.42 | ^3.4.14",
-        "symfony/yaml": "^2.8.42 | ^3.4.14",
+        "symfony/http-kernel": "^2.8.42 | ^3.4.14 | ^4.4.1",
+        "symfony/config": "^2.8.42 | ^3.4.14 | ^4.4.1",
+        "symfony/dependency-injection": "^2.8.42 | ^3.4.14 | ^4.4.1",
+        "symfony/yaml": "^2.8.42 | ^3.4.14 | ^4.4.1",
         "webfactory/download-bundle": "^2.9.2"
     },
 
