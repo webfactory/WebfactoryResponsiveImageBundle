@@ -8,6 +8,7 @@
             'sizes': '100%',
             'transformations_to_widths': {'image_xxs' : '320w'},
             'class': '',
+            'data_attributes': '',
             'alt' : '',
             'lazyload': true,
             'lqip': true,
@@ -28,6 +29,11 @@
             {% if image.title %}
                 title="{{ image.title }}"
             {% endif %}
+            {% if options.data_attributes is not empty %}
+                {% for name, value in options.data_attributes %}
+                    data-{{ name }}="{{ value }}"
+                {% endfor %}
+            {% endif %}
         />
 
         <noscript>
@@ -39,6 +45,11 @@
                 {% endif %}
                 {% if image.title %}
                     title="{{ image.title }}"
+                {% endif %}
+                {% if options.data_attributes is not empty %}
+                    {% for name, value in options.data_attributes %}
+                        data-{{ name }}="{{ value }}"
+                    {% endfor %}
                 {% endif %}
             />
         </noscript>
@@ -55,6 +66,7 @@
         'lazyload': true,
         'lqip': true,
         'placeholder_filter': 'image_xxs--blurred',
+        'data_attributes': '',
     } %}
 
     {% set defaultFormatOptions = {
@@ -95,6 +107,11 @@
                 {% endif %}
                 {% if options.title %}
                     title="{{ options.title }}"
+                {% endif %}
+                {% if options.data_attributes is not empty %}
+                    {% for name, value in options.data_attributes %}
+                        data-{{ name }}="{{ value }}"
+                    {% endfor %}
                 {% endif %}
             />
         {% endif %}
