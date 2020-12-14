@@ -1,0 +1,5 @@
+jb_phumbor:
+    server:
+        # dummy values to cut off external dependencies
+        url: 'http://local-thumbor-dummy'
+        secret:

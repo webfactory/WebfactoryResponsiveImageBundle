@@ -43,6 +43,11 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
             $resultingConfig = array_replace_recursive($resultingConfig, $developmentConfig);
         }
 
+        if ($container->getParameter('kernel.environment') === 'testing') {
+            $testingConfig = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/jb_phumbor-default-config_testing.yaml'))['jb_phumbor'];
+            $resultingConfig = array_replace_recursive($resultingConfig, $testingConfig);
+        }
+
         $container->prependExtensionConfig('jb_phumbor', $resultingConfig);
     }
 }

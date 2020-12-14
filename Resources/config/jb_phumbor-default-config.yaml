@@ -1,7 +1,8 @@
 # each setting can be overwritten in your application
 jb_phumbor:
     server:
-        url: "https://thumbor-cache.webfactory.de"
+        url: '%env(THUMBOR_URL)%'
+        secret: '%env(THUMBOR_SECURITY_KEY)%'
 
     transformations:
         image_thumb:
