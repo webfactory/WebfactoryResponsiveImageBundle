@@ -1,5 +1,1 @@
-jb_phumbor:
-    server:
-        # dummy values to cut off external dependencies
-        url: 'http://local-thumbor-dummy'
-        secret:
+# Staging system does not differ from production

@@ -1,0 +1,5 @@
+# dummy values to cut off external dependencies during automated software tests
+jb_phumbor:
+    server:
+        url: 'http://local-thumbor-dummy'
+        secret:

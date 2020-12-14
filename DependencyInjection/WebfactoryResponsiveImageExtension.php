@@ -34,20 +34,24 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
         }
 
         // Phumbor doesn't merge multiple configs, i.e. we have to consider only the first one
-        $actualConfig = $container->getExtensionConfig('jb_phumbor')[0];
-        $defaultConfig = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/jb_phumbor-default-config.yaml'))['jb_phumbor'];
-        $resultingConfig = array_replace_recursive($defaultConfig, $actualConfig);
+        $originalConfig = $container->getExtensionConfig('jb_phumbor')[0];
+        $resultingConfig = $this->addConfigForEnvironment($originalConfig, null);
 
-        if ($container->getParameter('kernel.environment') === 'development') {
-            $developmentConfig = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/jb_phumbor-default-config_development.yaml'))['jb_phumbor'];
-            $resultingConfig = array_replace_recursive($resultingConfig, $developmentConfig);
-        }
-
-        if ($container->getParameter('kernel.environment') === 'testing') {
-            $testingConfig = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/jb_phumbor-default-config_testing.yaml'))['jb_phumbor'];
-            $resultingConfig = array_replace_recursive($resultingConfig, $testingConfig);
+        $environment = $container->getParameter('kernel.environment');
+        if (in_array($environment, ['development', 'testing', 'test'], true)) {
+            $resultingConfig = $this->addConfigForEnvironment($resultingConfig, $environment);
         }
 
         $container->prependExtensionConfig('jb_phumbor', $resultingConfig);
+    }
+
+    private function addConfigForEnvironment(array $originalConfig, ?string $environment): array
+    {
+        $fileName = 'jb_phumbor-default-config'.($environment ? '_'.$environment : '').'.yaml';
+        $configToAdd = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/'.$fileName))['jb_phumbor'];
+
+        return is_array($configToAdd)
+            ? array_replace_recursive($originalConfig, $configToAdd)
+            : $originalConfig;
     }
 }
