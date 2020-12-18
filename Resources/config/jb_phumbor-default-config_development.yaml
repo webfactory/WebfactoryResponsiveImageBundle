@@ -1,4 +1,4 @@
 jb_phumbor:
     server:
-        # local development thumbor does not need a secret
-        secret:
+#        Local Thumbor-installation in Vagrant 18.04:
+        url: "http://10.37.129.10:8888"
