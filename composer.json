@@ -2,26 +2,16 @@
     "name": "webfactory/responsive-image-bundle",
     "description": "Symfony bundle for responsive images",
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://composer.webfactory.de"
-        }
-    ],
     "require": {
         "php": ">=5.5.9",
         "twig/twig": "^1.35.4|^2.0",
         "symfony/http-kernel": "^3.4.14 | ^4.4.1",
         "symfony/config": "^3.4.14 | ^4.4.1",
         "symfony/dependency-injection": "^3.4.14 | ^4.4.1",
-        "symfony/yaml": "^3.4.14 | ^4.4.1",
-        "webfactory/download-bundle": "^2.9.2"
+        "symfony/yaml": "^3.4.14 | ^4.4.1"
     },
     "suggest": {
         "jbouzekri/phumbor-bundle": "Can be auto-configured with default transformations"
-    },
-    "require-dev": {
-        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
