@@ -11,11 +11,8 @@ use Symfony\Component\Yaml\Yaml;
 
 class WebfactoryResponsiveImageExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $locator = new FileLocator(__DIR__ . '/../Resources/config');
-        $xmlLoader = new XmlFileLoader($container, $locator);
-        $xmlLoader->load('services.xml');
     }
 
     public function prepend(ContainerBuilder $container)
