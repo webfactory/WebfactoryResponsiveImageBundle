@@ -20,38 +20,22 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
 
     public function prepend(ContainerBuilder $container)
     {
-        $this->prependJbPhumborConfiguration($container);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function prependJbPhumborConfiguration(ContainerBuilder $container)
-    {
         $bundles = $container->getParameter('kernel.bundles');
+
         if (!isset($bundles['JbPhumborBundle'])) {
             return;
         }
 
-        // Phumbor doesn't merge multiple configs, i.e. we have to consider only the first one
-        $originalConfig = $container->getExtensionConfig('jb_phumbor')[0];
-        $resultingConfig = $this->addConfigForEnvironment($originalConfig, null);
+        $this->prependConfigFile(__DIR__.'/../Resources/config/jb_phumbor-default-config.yaml', $container);
 
         $environment = $container->getParameter('kernel.environment');
         if (in_array($environment, ['development', 'testing', 'test'], true)) {
-            $resultingConfig = $this->addConfigForEnvironment($resultingConfig, $environment);
+            $this->prependConfigFile(__DIR__."/../Resources/config/jb_phumbor-default-config_$environment.yaml", $container);
         }
-
-        $container->prependExtensionConfig('jb_phumbor', $resultingConfig);
     }
 
-    private function addConfigForEnvironment(array $originalConfig, ?string $environment): array
+    private function prependConfigFile(string $filename, ContainerBuilder $container): void
     {
-        $fileName = 'jb_phumbor-default-config'.($environment ? '_'.$environment : '').'.yaml';
-        $configToAdd = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/'.$fileName))['jb_phumbor'];
-
-        return is_array($configToAdd)
-            ? array_replace_recursive($originalConfig, $configToAdd)
-            : $originalConfig;
+        $container->prependExtensionConfig('jb_phumbor', Yaml::parse(file_get_contents($filename))['jb_phumbor']);
     }
 }
