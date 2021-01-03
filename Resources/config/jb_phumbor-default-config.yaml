@@ -1,9 +1,5 @@
 # each setting can be overwritten in your application
 jb_phumbor:
-    server:
-        url: '%env(THUMBOR_URL)%'
-        secret: '%env(THUMBOR_SECURITY_KEY)%'
-
     transformations:
         image_thumb:
             resize: { width: 80, height: 0 }
@@ -41,7 +37,6 @@ jb_phumbor:
             resize: { width: 2400, height: 0 }
             filters:
                 - { name: 'quality', arguments: [80] }
-
         image_xxs--squared:
             resize: { width: 320, height: 320 }
             filters:
@@ -70,7 +65,6 @@ jb_phumbor:
             resize: { width: 1600, height: 1600 }
             filters:
                 - { name: 'quality', arguments: [80] }
-
         image_xxs--blurred:
             resize: { width: 320, height: 0 }
             filters:
