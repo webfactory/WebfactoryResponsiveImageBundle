@@ -1,4 +1,0 @@
-jb_phumbor:
-    server:
-        # local development thumbor does not need a secret
-        secret:

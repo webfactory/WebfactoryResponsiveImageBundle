@@ -4,14 +4,12 @@
     "license": "MIT",
     "require": {
         "php": ">=5.5.9",
+        "jbouzekri/phumbor-bundle": "^2.2.0",
         "twig/twig": "^1.35.4|^2.0",
         "symfony/http-kernel": "^3.4.14 | ^4.4.1",
         "symfony/config": "^3.4.14 | ^4.4.1",
         "symfony/dependency-injection": "^3.4.14 | ^4.4.1",
         "symfony/yaml": "^3.4.14 | ^4.4.1"
-    },
-    "suggest": {
-        "jbouzekri/phumbor-bundle": "Can be auto-configured with default transformations"
     },
     "autoload": {
         "psr-4": {

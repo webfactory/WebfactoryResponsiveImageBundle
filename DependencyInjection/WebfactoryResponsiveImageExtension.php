@@ -17,38 +17,13 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
 
     public function prepend(ContainerBuilder $container)
     {
-        $this->prependJbPhumborConfiguration($container);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function prependJbPhumborConfiguration(ContainerBuilder $container)
-    {
         $bundles = $container->getParameter('kernel.bundles');
+
         if (!isset($bundles['JbPhumborBundle'])) {
-            return;
+            throw new \LogicException('WebfactoryResponsiveImageBundle requires that you also activate JbPhumborBundle (from jbouzekri/phumbor-bundle).');
         }
 
-        // Phumbor doesn't merge multiple configs, i.e. we have to consider only the first one
-        $originalConfig = $container->getExtensionConfig('jb_phumbor')[0];
-        $resultingConfig = $this->addConfigForEnvironment($originalConfig, null);
-
-        $environment = $container->getParameter('kernel.environment');
-        if (in_array($environment, ['development', 'testing', 'test'], true)) {
-            $resultingConfig = $this->addConfigForEnvironment($resultingConfig, $environment);
-        }
-
-        $container->prependExtensionConfig('jb_phumbor', $resultingConfig);
-    }
-
-    private function addConfigForEnvironment(array $originalConfig, ?string $environment): array
-    {
-        $fileName = 'jb_phumbor-default-config'.($environment ? '_'.$environment : '').'.yaml';
-        $configToAdd = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/'.$fileName))['jb_phumbor'];
-
-        return is_array($configToAdd)
-            ? array_replace_recursive($originalConfig, $configToAdd)
-            : $originalConfig;
+        $config = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/jb_phumbor-default-config.yaml'));
+        $container->prependExtensionConfig('jb_phumbor', $config['jb_phumbor']);
     }
 }
