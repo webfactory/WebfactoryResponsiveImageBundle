@@ -23,7 +23,7 @@ class WebfactoryResponsiveImageExtension extends Extension implements PrependExt
         $bundles = $container->getParameter('kernel.bundles');
 
         if (!isset($bundles['JbPhumborBundle'])) {
-            return;
+            throw new \LogicException('WebfactoryResponsiveImageBundle requires that you also activate JbPhumborBundle (from jbouzekri/phumbor-bundle).');
         }
 
         $config = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/jb_phumbor-default-config.yaml'));
