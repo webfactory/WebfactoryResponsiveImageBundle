@@ -1,6 +1,12 @@
 # each setting can be overwritten in your application
 jb_phumbor:
     transformations:
+        image_lqip:
+            resize: { width: 150, height: 0 }
+            filters:
+                - { name: 'strip_icc' }
+                - { name: 'blur', arguments: [ 20 ] }
+                - { name: 'quality', arguments: [ 10 ] }
         image_thumb:
             resize: { width: 80, height: 0 }
             filters:
