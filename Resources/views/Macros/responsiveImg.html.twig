@@ -6,13 +6,13 @@
         {% set image = {'alt': '', 'title': ''}|merge(image) %}
         {% set defaultImgOptions = {
             'sizes': '100%',
-            'transformations_to_widths': {'image_xxs' : '320w'},
+            'transformations_to_widths': {'image_xxxs' : '160w', 'image_xxs' : '320w', 'image_xs': '480w', 'image_s': '600w', 'image_md' : '992w', 'image_lg' : '1200w', 'image_xl' : '1600w'},
             'class': '',
             'data_attributes': '',
             'alt' : '',
             'lazyload': true,
             'lqip': true,
-            'placeholder_filter': 'image_xxs--blurred',
+            'placeholder_filter': 'image_lqip',
         } %}
         {% set options = options ? defaultImgOptions|merge(options) : defaultImgOptions %}
 
@@ -65,13 +65,13 @@
         'alt': '',
         'lazyload': true,
         'lqip': true,
-        'placeholder_filter': 'image_xxs--blurred',
+        'placeholder_filter': 'image_lqip',
         'data_attributes': '',
     } %}
 
     {% set defaultFormatOptions = {
         'sizes': '100vw',
-        'transformations_to_widths': {'image_xxs' : '320w'},
+        'transformations_to_widths': {'image_xxxs' : '160w', 'image_xxs' : '320w', 'image_xs': '480w', 'image_s': '600w', 'image_md' : '992w', 'image_lg' : '1200w', 'image_xl' : '1600w'},
         'media_query': '',
     } %}
 

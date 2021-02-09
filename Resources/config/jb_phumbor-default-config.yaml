@@ -11,6 +11,10 @@ jb_phumbor:
             resize: { width: 80, height: 0 }
             filters:
                 - { name: 'quality', arguments: [60] }
+        image_xxxs:
+            resize: { width: 160, height: 0 }
+            filters:
+                - { name: 'quality', arguments: [ 60 ] }
         image_xxs:
             resize: { width: 320, height: 0 }
             filters:
