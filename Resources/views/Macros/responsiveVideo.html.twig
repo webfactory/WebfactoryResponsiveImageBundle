@@ -1,0 +1,39 @@
+{% macro responsiveBackgroundVideo(video, options) %}
+    {% if video.url %}
+        {% import _self as helper %}
+
+        {% set defaultVideoOptions = {
+            'transformations': {
+                'video_hevc' : 'video/mp4; codecs=hevc',
+                'video_webm' : 'video/webm; codecs=vp9',
+                'video_mp4': 'video/mp4'
+            },
+            'class': '',
+            'data_attributes': '',
+            'poster': '',
+            'autoplay': true,
+            'loop': true,
+            'muted': true,
+            'playsinline': true,
+        } %}
+
+        {% set options = options ? defaultVideoOptions|merge(options) : defaultVideoOptions %}
+
+        <video
+            {% if options.class %}class="{{ options.class }}"{% endif %}
+            {% if options.autoplay %}autoplay=""{% endif %}
+            {% if options.muted %}muted=""{% endif %}
+            {% if options.loop %}loop=""{% endif %}
+            {% if options.playsinline %}playsinline=""{% endif %}
+            {% if options.data_attributes is not empty %}
+                {% for name, value in options.data_attributes %}
+                    data-{{ name }}="{{ value }}"
+                {% endfor %}
+            {% endif %}
+        >
+            {%- for transformation, type in options.transformations -%}
+                <source src="{{ thumbor(video.url, transformation) }}" type="{{ type }}" />
+            {%- endfor -%}"
+        </video>
+    {% endif %}
+{% endmacro %}
