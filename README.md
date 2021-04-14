@@ -110,9 +110,9 @@ Example:
   - `transformations` (optional): an object with thumbor transformation names as keys and MIME-Types as values. Defaults to 
     ```
     {
-      'video_hevc' : 'video/mp4; codecs=hevc',
-      'video_webm' : 'video/webm; codecs=vp9',
-      'video_mp4': 'video/mp4'
+      'video_hevc_720p' : 'video/mp4; codecs=hevc',
+      'video_webm_720p' : 'video/webm; codecs=vp9',
+      'video_mp4_720p': 'video/mp4'
     }
     ```
   - `class` (optional): CSS classes to add to the image. Defaults to empty string.
