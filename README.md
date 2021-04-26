@@ -3,6 +3,23 @@
 A convenience Symfony bundle tailored for current responsive images needs of the webfactory GmbH, without any claims on
 reusability outside of this scope. Ye be warned.
 
+## Installation
+
+    composer req webfactory/responsive-image-bundle
+
+Activate the bundle, e.g. in `src/bundles.php`:
+
+```php
+<?php
+return [
+    // ...
+    Webfactory\ResponsiveImageBundle\WebfactoryResponsiveImageBundle::class => ['all' => true],
+];
+```
+
+If you intend to use lazyloading for images (which is the default), require `"lazysizes": "^5.3"` in your `/package.json`.
+
+
 ## Twig macros
 
 ### Responsive image:
