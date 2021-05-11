@@ -90,3 +90,39 @@ jb_phumbor:
             filters:
                 - { name: 'blur', arguments: [30] }
                 - { name: 'quality', arguments: [50] }
+        video_hevc_480p:
+            resize: { width: 0, height: 480 }
+            filters:
+                - { name: 'format', arguments: [ 'hevc' ] }
+        video_hevc_720p:
+            resize: { width: 0, height: 720 }
+            filters:
+                - { name: 'format', arguments: [ 'hevc' ] }
+        video_hevc_1080p:
+            resize: { width: 0, height: 1080 }
+            filters:
+                - { name: 'format', arguments: [ 'hevc' ] }
+        video_webm_480p:
+            resize: { width: 0, height: 480 }
+            filters:
+                - { name: 'format', arguments: [ 'webm' ] }
+        video_webm_720p:
+            resize: { width: 0, height: 720 }
+            filters:
+                - { name: 'format', arguments: [ 'webm' ] }
+        video_webm_1080p:
+            resize: { width: 0, height: 1080 }
+            filters:
+                - { name: 'format', arguments: [ 'webm' ] }
+        video_mp4_480p:
+            resize: { width: 0, height: 480 }
+            filters:
+                - { name: 'format', arguments: [ 'mp4' ] }
+        video_mp4_720p:
+            resize: { width: 0, height: 720 }
+            filters:
+                - { name: 'format', arguments: [ 'mp4' ] }
+        video_mp4_1080p:
+            resize: { width: 0, height: 1080 }
+            filters:
+                - { name: 'format', arguments: [ 'mp4' ] }

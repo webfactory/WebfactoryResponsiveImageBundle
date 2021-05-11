@@ -117,6 +117,39 @@ Example:
 ) }}
 ```
 
+### Responsive Background Video
+
+`responsiveBackgroundVideo(video, options)` with:
+
+- `video`: an array with the following keys:
+  - `url` (mandatory): the URL of the image
+- `options`: an array with the following keys:
+  - `transformations` (optional): an object with thumbor transformation names as keys and MIME-Types as values. Defaults to 
+    ```
+    {
+      'video_hevc_720p' : 'video/mp4; codecs=hevc',
+      'video_webm_720p' : 'video/webm; codecs=vp9',
+      'video_mp4_720p': 'video/mp4'
+    }
+    ```
+  - `class` (optional): CSS classes to add to the image. Defaults to empty string.
+  - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs. Defaults to empty string.
+
+Example:
+
+```
+{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveVideo.html.twig' as rVid %}
+
+{{ rVid.responsiveBackgroundVideo(
+    {
+        'url': s3_cachable_url(entity, 'video')
+    },
+    {
+        'class': 'background-video',
+        'data_attributes': {'credits': '© P. H. O'Tographer'},
+    }
+) }}
+```
 
 ## Default Configuration for JbPhumborBundle
 
