@@ -40,9 +40,7 @@
             <img
                 src="{{ thumbor(image.url, options.transformations_to_widths|keys|first) }}"
                 class="{{ options.class }}"
-                {% if image.alt %}
-                    alt="{{ image.alt }}"
-                {% endif %}
+                alt="{{ options.alt is not empty ? options.alt : image.alt }}"
                 {% if image.title %}
                     title="{{ image.title }}"
                 {% endif %}
