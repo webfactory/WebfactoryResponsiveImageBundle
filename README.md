@@ -42,7 +42,7 @@ If you intend to use lazyloading for images (which is the default), require `"la
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rimg %}
 
 {{ rimg.responsiveImg(
     {
@@ -81,7 +81,7 @@ Example:
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rimg %}
 
 {{ rimg.responsivePicture(
     [
@@ -138,7 +138,7 @@ Example:
 Example:
 
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveVideo.html.twig' as rVid %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveVideo.html.twig' as rVid %}
 
 {{ rVid.responsiveBackgroundVideo(
     {
