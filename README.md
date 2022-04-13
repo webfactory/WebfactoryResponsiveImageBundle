@@ -31,7 +31,7 @@ If you intend to use lazyloading for images (which is the default), require `"la
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
 - `options`: an array with the following keys:
-    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
+    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% if no sizes is given and lazyloading is disabled.
     - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to `{'image_xxs' : '320w'}`.
     - `class` (optional): CSS classes to add to the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs. Defaults to empty string.
