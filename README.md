@@ -77,6 +77,7 @@ Example:
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs.
     - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
     - `lazyload` (optional): Use lazyloading. Defaults to `true`.
+    - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
 Example:
  
