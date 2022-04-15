@@ -31,12 +31,12 @@ If you intend to use lazyloading for images (which is the default), require `"la
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
 - `options`: an array with the following keys:
-    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% if no sizes is given and lazyloading is disabled.
+    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to `auto`, or to `100%` if lazyloading is disabled and sizes is empty.
     - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to `{'image_xxs' : '320w'}`.
     - `class` (optional): CSS classes to add to the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs. Defaults to empty string.
     - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
-    - `lazyload` (optional): Whether to add the Thumbor filter when lazyloading the image. Should match the target dimensions of the image. Thumbor-Filters are configured in config.yml. Defaults to true.
+    - `lazyload` (optional): Use lazyloading. Defaults to true.
     - `lqip` (optional): Flag to optionally disable the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
 Example:
