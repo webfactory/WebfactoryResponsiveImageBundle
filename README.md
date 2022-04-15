@@ -67,16 +67,16 @@ Example:
 - `formats`: Array of objects, with each object describing a different format variant of the motive/picture by the following keys:
     - `image_url` (mandatory): the URL of the image in this format
     - `options` (optional): an array with the following keys that parametrize this format variant:
-        - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
-        - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to `{'image_xxs' : '320w'}`.
-        - `media_query` (optional): media query for the source element
+        - `sizes` (optional): a string that sets the `sizes`-Attribut. Defaults to `auto`, or to `100%` if lazyloading is disabled and sizes is empty.
+        - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Sets the `srcset`-Attribute, with the thumbor image URLs based on the given transformations as the source. Defaults to a `srcset` with keys from `imagex_xxxs` to `image_xl` respectively to values from `160w` to `1600w`.
+        - `media_query` (optional): a string that sets the media query for the source element
 - `options`: an array with the following keys:
     - `class`: Optional class to add to the img-tag. Defaults to empty class attribute is no value is given to keep the code readable.
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs.
-    - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
-    - `lazyload`: Enabled by default. Let sizes-calculation be handled by lazysizes script. https://github.com/aFarkas/lazysizes
+    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
+    - `lazyload` (optional): Use lazyloading. Defaults to `true`.
 
 Example:
  
@@ -112,7 +112,7 @@ Example:
         'lazyload': true,
         'class': 'js-object-fit',
         'alt': 'Portrait of ' ~ artistEntity.name,
-        'data_attributes': {'credits': '© P. H. O'Tographer'},
+        'data_attributes': {'credits': '© P. H. O\'Tographer'},
     }
 ) }}
 ```
@@ -146,7 +146,7 @@ Example:
     },
     {
         'class': 'background-video',
-        'data_attributes': {'credits': '© P. H. O'Tographer'},
+        'data_attributes': {'credits': '© P. H. O\'Tographer'},
     }
 ) }}
 ```
