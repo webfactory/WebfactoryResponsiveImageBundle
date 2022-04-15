@@ -42,9 +42,9 @@ If you intend to use lazyloading for images (which is the default), require `"la
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rImg %}
 
-{{ rimg.responsiveImg(
+{{ rImg.responsiveImg(
     {
         'url': s3_cachable_url(artist, 'photo'),
         'alt': 'Portrait of ' ~ artistEntity.name
@@ -82,9 +82,9 @@ Example:
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rImg %}
 
-{{ rimg.responsivePicture(
+{{ rImg.responsivePicture(
     [
         {
             'image_url': cachable_s3_url(artistEntity, 'photoInPortraitFormat'),
