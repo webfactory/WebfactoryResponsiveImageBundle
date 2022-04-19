@@ -35,7 +35,7 @@ If you intend to use lazyloading for images (which is the default), require `"la
     - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Sets the `srcset`-Attribute, with the thumbor image URLs based on the given transformations as the source. Defaults to a `srcset` with keys from `imagex_xxxs` to `image_xl` respectively to values from `160w` to `1600w`.
     - `class` (optional): CSS classes to add to the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs. Defaults to empty string.
-    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
+    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
     - `lazyload` (optional): Use lazyloading. Defaults to `true`.
     - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
@@ -75,7 +75,7 @@ Example:
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs.
-    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
+    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
     - `lazyload` (optional): Use lazyloading. Defaults to `true`.
     - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
