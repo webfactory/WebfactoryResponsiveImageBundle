@@ -31,20 +31,20 @@ If you intend to use lazyloading for images (which is the default), require `"la
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
 - `options`: an array with the following keys:
-    - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
-    - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to `{'image_xxs' : '320w'}`.
+    - `sizes` (optional): a string that sets the `sizes`-Attribut. Defaults to `auto`, or to `100%` if lazyloading is disabled and sizes is empty.
+    - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Sets the `srcset`-Attribute, with the thumbor image URLs based on the given transformations as the source. Defaults to a `srcset` with keys from `imagex_xxxs` to `image_xl` respectively to values from `160w` to `1600w`.
     - `class` (optional): CSS classes to add to the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs. Defaults to empty string.
-    - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
-    - `lazyload` (optional): Whether to add the Thumbor filter when lazyloading the image. Should match the target dimensions of the image. Thumbor-Filters are configured in config.yml. Defaults to true.
-    - `lqip` (optional): Flag to optionally disable the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
+    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
+    - `lazyload` (optional): Use lazyloading. Defaults to `true`.
+    - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rImg %}
 
-{{ rimg.responsiveImg(
+{{ rImg.responsiveImg(
     {
         'url': s3_cachable_url(artist, 'photo'),
         'alt': 'Portrait of ' ~ artistEntity.name
@@ -67,23 +67,24 @@ Example:
 - `formats`: Array of objects, with each object describing a different format variant of the motive/picture by the following keys:
     - `image_url` (mandatory): the URL of the image in this format
     - `options` (optional): an array with the following keys that parametrize this format variant:
-        - `sizes` (optional): a string with a size or an array with sizes, which should match layout/breakpoints. Defaults to 100% is no sizes is given and lazyloading is disabled.
-        - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Defaults to `{'image_xxs' : '320w'}`.
-        - `media_query` (optional): media query for the source element
+        - `sizes` (optional): a string that sets the `sizes`-Attribut. Defaults to `auto`, or to `100%` if lazyloading is disabled and sizes is empty.
+        - `transformations_to_widths` (optional): an object with thumbor transformation names as keys and image widths as values. Sets the `srcset`-Attribute, with the thumbor image URLs based on the given transformations as the source. Defaults to a `srcset` with keys from `imagex_xxxs` to `image_xl` respectively to values from `160w` to `1600w`.
+        - `media_query` (optional): a string that sets the media query for the source element
 - `options`: an array with the following keys:
     - `class`: Optional class to add to the img-tag. Defaults to empty class attribute is no value is given to keep the code readable.
     - `alt` (optional): the alternative text for the image. Defaults to empty string.
     - `title` (optional): the title text for the image. Defaults to empty string.
     - `data_attributes` (optional): an iterable object with data-attribute names (= the part after `data-`) and values as key/value pairs.
-    - `placeholder_filter`: The thumbor filter which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default filters is provided with this bundle (see below) and can be overwritten / extended in the applicatrion configuration, e.g. the config.yml.
-    - `lazyload`: Enabled by default. Let sizes-calculation be handled by lazysizes script. https://github.com/aFarkas/lazysizes
+    - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
+    - `lazyload` (optional): Use lazyloading. Defaults to `true`.
+    - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
 
 Example:
  
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveImg.html.twig' as rimg %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveImg.html.twig' as rImg %}
 
-{{ rimg.responsivePicture(
+{{ rImg.responsivePicture(
     [
         {
             'image_url': cachable_s3_url(artistEntity, 'photoInPortraitFormat'),
@@ -112,7 +113,7 @@ Example:
         'lazyload': true,
         'class': 'js-object-fit',
         'alt': 'Portrait of ' ~ artistEntity.name,
-        'data_attributes': {'credits': '© P. H. O'Tographer'},
+        'data_attributes': {'credits': '© P. H. O\'Tographer'},
     }
 ) }}
 ```
@@ -138,7 +139,7 @@ Example:
 Example:
 
 ```
-{% import '@WebfactoryResponsiveImageBundle/Macros/responsiveVideo.html.twig' as rVid %}
+{% import '@WebfactoryResponsiveImage/Macros/responsiveVideo.html.twig' as rVid %}
 
 {{ rVid.responsiveBackgroundVideo(
     {
@@ -146,7 +147,7 @@ Example:
     },
     {
         'class': 'background-video',
-        'data_attributes': {'credits': '© P. H. O'Tographer'},
+        'data_attributes': {'credits': '© P. H. O\'Tographer'},
     }
 ) }}
 ```
