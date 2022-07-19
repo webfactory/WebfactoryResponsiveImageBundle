@@ -102,9 +102,7 @@
                     data-src="{{ thumbor(image_url, options.placeholder_filter) }}"
                 {% endif %}
                 class="{% if options.lazyload %}lazyload {% endif %}{{ options.class }}"
-                {% if options.alt %}
-                    alt="{{ options.alt }}"
-                {% endif %}
+                alt="{{ options.alt }}"
                 {% if options.title %}
                     title="{{ options.title }}"
                 {% endif %}
