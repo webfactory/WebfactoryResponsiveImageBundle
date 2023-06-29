@@ -6,9 +6,9 @@
         "php": "7.2.*|7.3.*|7.4.*|8.0.*|8.1.*",
         "jbouzekri/phumbor-bundle": "^2.2.0|^3.0",
         "twig/twig": "^1.35.4|^2.0|^3.0",
-        "symfony/config": "^3.4.14|^4.4.1|^5.0",
-        "symfony/dependency-injection": "^3.4.14|^4.4.1|^5.0",
-        "symfony/yaml": "^3.4.14|^4.4.1|^5.0"
+        "symfony/config": "^3.4.14|^4.4.1|^5.0|^6.0",
+        "symfony/dependency-injection": "^3.4.14|^4.4.1|^5.0|^6.0",
+        "symfony/yaml": "^3.4.14|^4.4.1|^5.0|^6.0"
     },
     "autoload": {
         "psr-4": {
