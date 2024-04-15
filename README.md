@@ -38,6 +38,7 @@ If you intend to use lazyloading for images (which is the default), require `"la
     - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
     - `lazyload` (optional): Use lazyloading. Defaults to `true`.
     - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
+    - `focal_point` (optional): An object with `x` and `y` properties that contain integer values. This bundles exposes the focal point via CSS Custom Properties on `<img>`; those Custom Properties can be used to mark the area that should be cropped last when the image is cropped via `object-fit`. The project using this bundle needs to add `object-position: var(--focal-x, center) var(--focal-y, top);` or similar to the image styles. This will interpret the focal point if one was selected in the CMS or fall back to the comma-separated values (which can be any length or keyword that is valid for `object-position`).
 
 Example:
  
@@ -78,6 +79,7 @@ Example:
     - `placeholder_filter`: a string with the name of the thumbor transformation (i.e. `image_lqip`) which is added to the placeholder image when lazyloading the image. Should match the target dimensions of the image. A list of default transformations is provided with this bundle (see below) and can be overwritten / extended in the application configuration, e.g. the config.yml.
     - `lazyload` (optional): Use lazyloading. Defaults to `true`.
     - `lqip` (optional): Use the LQIP-method ([original concept (2013)](https://www.guypo.com/introducing-lqip-low-quality-image-placeholders), [current popular LQIP options](https://cloudinary.com/blog/low_quality_image_placeholders_lqip_explained)) of always loading a low-quality placeholder image. Defaults to `true`.
+    - `focal_point` (optional): An object with `x` and `y` properties that contain integer values. This bundles exposes the focal point via CSS Custom Properties on `<img>`; those Custom Properties can be used to mark the area that should be cropped last when the image is cropped via `object-fit`. The project using this bundle needs to add `object-position: var(--focal-x, center) var(--focal-y, top);` or similar to the image styles. This will interpret the focal point if one was selected in the CMS or fall back to the comma-separated values (which can be any length or keyword that is valid for `object-position`).
 
 Example:
  

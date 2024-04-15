@@ -14,6 +14,7 @@
             'lazyload': true,
             'lqip': true,
             'placeholder_filter': 'image_lqip',
+            'focal_point': null
         } %}
         {% set options = options ? defaultImgOptions|merge(options) : defaultImgOptions %}
 
@@ -35,6 +36,9 @@
                     data-{{ name }}="{{ value }}"
                 {% endfor %}
             {% endif %}
+            {% if options.focal_point and options.focal_point.x and options.focal_point.y %}
+                style="--focal-x: {{ options.focal_point.x ~ '%' }}; --focal-y: {{ options.focal_point.y ~ '%' }};"
+            {% endif %}
         />
 
         <noscript>
@@ -49,6 +53,9 @@
                     {% for name, value in options.data_attributes %}
                         data-{{ name }}="{{ value }}"
                     {% endfor %}
+                {% endif %}
+                {% if options.focal_point and options.focal_point.x and options.focal_point.y %}
+                    style="--focal-x: {{ options.focal_point.x ~ '%' }}; --focal-y: {{ options.focal_point.y ~ '%' }};"
                 {% endif %}
             />
         </noscript>
@@ -67,6 +74,7 @@
         'lqip': true,
         'placeholder_filter': 'image_lqip',
         'data_attributes': '',
+        'focal_point': null
     } %}
 
     {% set defaultFormatOptions = {
@@ -110,6 +118,9 @@
                     {% for name, value in options.data_attributes %}
                         data-{{ name }}="{{ value }}"
                     {% endfor %}
+                {% endif %}
+                {% if options.focal_point and options.focal_point.x and options.focal_point.y %}
+                    style="--focal-x: {{ options.focal_point.x ~ '%' }}; --focal-y: {{ options.focal_point.y ~ '%' }};"
                 {% endif %}
             />
         {% endif %}
