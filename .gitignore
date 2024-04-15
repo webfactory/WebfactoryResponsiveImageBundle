@@ -1,11 +1,2 @@
-bin/
-conf/
-logs/
-sessions/
-tmp/
-node_modules/
-var/
-!var/cache/.keepme
 vendor/
 composer.lock
-phpunit.xml
