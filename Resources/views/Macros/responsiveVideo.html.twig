@@ -15,6 +15,7 @@
             'loop': true,
             'muted': true,
             'playsinline': true,
+            'poster': true,
         } %}
 
         {% set options = options ? defaultVideoOptions|merge(options) : defaultVideoOptions %}
@@ -25,6 +26,7 @@
             {% if options.muted %}muted=""{% endif %}
             {% if options.loop %}loop=""{% endif %}
             {% if options.playsinline %}playsinline=""{% endif %}
+            {% if options.poster %}poster="{{ thumbor(video.url, 'image_video_poster') }}"{% endif %}
             {% if options.data_attributes is not empty %}
                 {% for name, value in options.data_attributes %}
                     data-{{ name }}="{{ value }}"
@@ -32,7 +34,7 @@
             {% endif %}
         >
             {%- for transformation, type in options.transformations -%}
-                <source src="{{ thumbor(video.url, transformation) }}" type="{{ type }}" />
+        <source src="{{ thumbor(video.url, transformation) }}x" type="{{ type }}" />
             {%- endfor -%}"
         </video>
     {% endif %}
